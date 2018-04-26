@@ -78,7 +78,34 @@
       	"controlAggregation": "pages",
       	"transition": "slide",
 				"async":"true"
-    	}
+    	},
+			"routes": [{
+			  "pattern": "register",
+			  "name": "registerView",
+			  "target": "registerViewer"
+			},{
+				"pattern": "ladders",
+			  "name": "ladderView",
+			  "target": "ladderViewer"
+				},{
+					"pattern": "player-stats",
+				  "name": "statsView",
+				  "target": "statsViewer"
+					}],
+			"targets": {
+			  "registerViewer": {
+			    "viewName": "Register",
+					"transition":"show"
+			  },
+				"ladderViewer": {
+					"viewName": "Ladder",
+					"transition": "show"
+				},
+				"statsViewer": {
+					"viewName": "Stats",
+					"transition": "show"
+				}
+			}
   	}
 	}
 }
