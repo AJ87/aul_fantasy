@@ -1,5 +1,4 @@
 //CRUD operations
-var database = require('./database.js');
 
 var responder = function(result, res, status_ok, send_res, status_err, err_text) {
   if (result) {
@@ -23,7 +22,7 @@ var tryCatch = function(operation, res) {
 }
 
 module.exports = {
-  getCollection: function(db_table, res) {
+  getCollection: function(database, db_table, res) {
 
     var operation = function() {
       database.getCollection(db_table, function(result) {
@@ -32,7 +31,7 @@ module.exports = {
     }
     tryCatch(operation, res);
   },
-  getRecord: function(key, db_table, res) {
+  getRecord: function(database, key, db_table, res) {
 
     var operation = function() {
       database.getRecord(key, db_table, function(result) {
@@ -41,7 +40,7 @@ module.exports = {
     }
     tryCatch(operation, res);
   },
-  createRecord: function(key, data, db_table, res) {
+  createRecord: function(database, key, data, db_table, res) {
 
     var operation = function() {
       database.createRecord(key, data, db_table, function(result) {
@@ -50,7 +49,7 @@ module.exports = {
     }
     tryCatch(operation, res);
   },
-  updateRecord: function(key, data, db_table, res) {
+  updateRecord: function(database, key, data, db_table, res) {
 
     var operation = function() {
       database.updateRecord(key, data, db_table, function(result) {
@@ -59,7 +58,7 @@ module.exports = {
     }
     tryCatch(operation, res);
   },
-  deleteRecord: function(key, db_table, res) {
+  deleteRecord: function(database, key, db_table, res) {
 
     var operation = function() {
       database.deleteRecord(key, db_table, function(result) {

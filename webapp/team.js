@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var operations = require('./operations.js');
+var abstractPageRoute = require('./abstractPageRoute.js');
 
 const db_table = 'sermons';
 
@@ -15,5 +16,7 @@ router.route('/')
     // create new team
     operations.createRecord({id: req.body.id}, req.body, db_table, res);
   });
+
+extend(router.prototype, abstractPageRoute);
 
 module.exports = router;

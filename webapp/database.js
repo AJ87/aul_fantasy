@@ -3,9 +3,10 @@ var MongoClient = require('mongodb').MongoClient;
 // Connection URL
 var url = 'mongodb://localhost:27017/fantasy';
 var _db = null;
+var log;
 
 function _close_db() {
-   console.log("Closing database");
+   log.info("Closing database");
    if (_db) {
      _db.close();
      _db = null;
@@ -14,11 +15,11 @@ function _close_db() {
 
 function _insertDocument(data, table) {
   return new Promise( function pr(resolve,reject) {
-    console.log("Insert Document");
+    log.debug("Insert Document");
     var _collection = _db.collection(table);
     _collection.insertOne(data, function(err, result) {
       if (err) {
-        console.log("Error inserting document: " + data);
+        log.error("Error inserting document: " + data);
         //throw err;
         reject(err);
       } else {
@@ -30,11 +31,11 @@ function _insertDocument(data, table) {
 
 function _findDocument(key, table) {
   return new Promise( function pr(resolve,reject) {
-    console.log("Find Document");
+    log.debug("Find Document");
     var _collection = _db.collection(table);
     _collection.find(key).toArray(function(err, docs) {
       if (err) {
-        console.log("Error finding document: " + data);
+        log.error("Error finding document: " + data);
         //throw err;
         reject(err);
       } else {
@@ -46,11 +47,11 @@ function _findDocument(key, table) {
 
 function _deleteDocument(key, table) {
   return new Promise( function pr(resolve,reject) {
-    console.log("Delete Document");
+    log.debug("Delete Document");
     var _collection = _db.collection(table);
     _collection.deleteOne(key, function(err, result) {
       if (err) {
-        console.log("Error deleting document: " + data);
+        log.error("Error deleting document: " + data);
         //throw err;
         reject(err);
       } else {
@@ -62,16 +63,16 @@ function _deleteDocument(key, table) {
 
 function _connect() {
   return new Promise( function pr(resolve,reject) {
-    console.log("Connecting to database...");
+    log.info("Connecting to database...");
     // Use connect method to connect to the database
 
     MongoClient.connect(url, function(err, db) {
       if (err === null) {
-        console.log('Connected successfully to database');
+        log.info('Connected successfully to database');
         _db = db;
         resolve();
       } else {
-        console.log('Error connecting to database');
+        log.error('Error connecting to database');
         reject(err);
       }
     });
@@ -79,14 +80,14 @@ function _connect() {
 };
 
 function getCollection(key,table) {
-    console.log("Get Collection");
-    console.log(`get collection: ${table}`);
+    log.debug("Get Collection");
+    log.debug(`get collection: ${table}`);
     return _findDocument(key, table);
 }
 
 function getRecord(key, table) {
   return new Promise( function pr(resolve,reject) {
-    console.log("Get Record");
+    log.debug("Get Record");
     _findDocument(key, table)
     .then(
       function fullfilled(result) {
@@ -105,11 +106,11 @@ function getRecord(key, table) {
 
 function createRecord(key, data, table) {
   return new Promise( function pr(resolve,reject) {
-    console.log("Create Record");
+    log.debug("Create Record");
     getRecord(key, table)
     .then(
       function fullfilled(result) {
-        console.log("Record already exists with same key");
+        log.warn("Record already exists with same key");
         reject("Record already exists with same key");
       },
       function rejected(reason) {
@@ -129,7 +130,7 @@ function createRecord(key, data, table) {
 
 function updateRecord(key, data, table) {
   return new Promise( function pr(resolve,reject) {
-    console.log("Update Record");
+    log.debug("Update Record");
     deleteRecord(key, table)
     .then(
       function fullfilled(result) {
@@ -152,7 +153,7 @@ function updateRecord(key, data, table) {
 
 function deleteRecord(key, table) {
   return new Promise( function pr(resolve,reject) {
-    console.log("Delete Record");
+    log.debug("Delete Record");
     _deleteDocument(key, table)
     .then(
       function fullfilled(result) {
@@ -165,8 +166,13 @@ function deleteRecord(key, table) {
   });
 }
 
-function initialise() {
+function initialise(log) {
+  log = log;
   return _connect();
+}
+
+function close() {
+  _close_db;
 }
 
 var database = {
@@ -175,7 +181,8 @@ var database = {
   getRecord: getRecord,
   createRecord: createRecord,
   updateRecord: updateRecord,
-  deleteRecord: deleteRecord
+  deleteRecord: deleteRecord,
+  close: close
 };
 
 module.exports = database;
