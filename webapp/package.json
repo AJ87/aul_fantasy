@@ -2,8 +2,9 @@
     "name": "aul_fantasy",
     "version": "2.0.0",
     "dependencies": {
-        "mongodb": "^2.2.31",
-        "nodemailer": "^4.1.0"
+        "bunyan": "^1.8.12",
+        "express": "^4.16.3",
+        "mongodb": "^2.2.31"
     },
     "description": "Australian Ultimate League Fantasy Website",
     "repository": {
