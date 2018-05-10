@@ -10,19 +10,19 @@ sap.ui.define([
 
 		},
 		navigateToHome: function() {
-
+			window.location.href = "/";
 		},
 		navigateToLadder: function() {
-
+			window.location.href = "/#/ladders";
 		},
 		navigateToPlayerStats: function() {
-
+			window.location.href = "/#/player-stats";
 		},
 		navigateToRegister: function() {
-
+			window.location.href = "/#/register";
 		},
 		navigateToInfo: function() {
-
+			window.location.href = "/#/info";
 		}
 	});
 });

@@ -91,7 +91,11 @@
 					"pattern": "player-stats",
 				  "name": "statsView",
 				  "target": "statsViewer"
-					}],
+					},{
+						"pattern": "info",
+					  "name": "infoView",
+					  "target": "infoViewer"
+						}],
 			"targets": {
 			  "registerViewer": {
 			    "viewName": "Register",
@@ -103,6 +107,10 @@
 				},
 				"statsViewer": {
 					"viewName": "Stats",
+					"transition": "show"
+				},
+				"infoViewer": {
+					"viewName": "Info",
 					"transition": "show"
 				}
 			}

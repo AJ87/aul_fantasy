@@ -14,6 +14,12 @@ sap.ui.jsview("aul_fantasy.view.Home", {
 	 */
 	createContent: function(oController) {
 
+// add AUL logo
+		var oLogo = new sap.m.Image(this.createId("aulLogo"),{
+			src: "./images/aul_logo.png"
+		});
+
+// common menu set up
 		var oToolHeader = new sap.tnt.ToolHeader(this.createId("HomePageHeader"),{});
 
 		var oButton = new sap.m.Button(this.createId("ButtonHome"),{
@@ -50,7 +56,8 @@ sap.ui.jsview("aul_fantasy.view.Home", {
 		var oPage = new sap.m.Page(this.createId("HomePage"),{
 			title: "{i18n>title}",
 			showHeader: true,
-			customHeader: oToolHeader
+			customHeader: oToolHeader,
+			content: oLogo
 		});
 
 		var app = new sap.m.App(this.createId("myApp"), {
