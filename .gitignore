@@ -11,4 +11,4 @@ mock_preview_sapui5.html
 .*/mock_preview_sapui5.html
 /webapp/resources/*
 *.DS_Store
-/webapp/node_modules/
+/node_modules/
