@@ -5,8 +5,23 @@ sap.ui.define([
 ], function(Controller,JSONModel,MessageBox) {
 	"use strict";
 
-	return Controller.extend("SMADJS.controller.Home", {
+	return Controller.extend("aul_fantasy.controller.Home", {
 		onInit: function() {
+
+		},
+		navigateToHome: function() {
+
+		},
+		navigateToLadder: function() {
+
+		},
+		navigateToPlayerStats: function() {
+
+		},
+		navigateToRegister: function() {
+
+		},
+		navigateToInfo: function() {
 
 		}
 	});
