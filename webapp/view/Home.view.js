@@ -14,6 +14,9 @@ sap.ui.jsview("SMADJS.view.Home", {
 	 */
 	createContent: function(oController) {
 
+		var oPage = new sap.m.Page(this.createId("HomePage"),{
+			title: "{i18n>title}",
+		});
 
 		var app = new sap.m.App(this.createId("myApp"), {
 			initialPage: "oPage"
