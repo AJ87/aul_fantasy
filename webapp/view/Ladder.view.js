@@ -31,7 +31,7 @@ sap.ui.jsview("aul_fantasy.view.Ladder", {
 		oToolHeader.addContent(oButton);
 
 		oButton = new sap.m.Button(this.createId("ButtonPlayerStats"),{
-			text: "PlayerStats",
+			text: "Player Stats",
 			press: [oController.navigateToPlayerStats,oController]
 		});
 		oToolHeader.addContent(oButton);

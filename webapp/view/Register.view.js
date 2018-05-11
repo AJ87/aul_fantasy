@@ -14,6 +14,79 @@ sap.ui.jsview("aul_fantasy.view.Register", {
 	 */
 	createContent: function(oController) {
 
+		var columns = [];
+
+    var oColumn = new sap.m.Column({
+      header: new sap.m.Text({text:"Name"})
+    });
+    columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+      header: new sap.m.Text({text:"Sex"})
+    });
+    columns.push(oColumn);
+
+    oColumn = new sap.m.Column({
+      header: new sap.m.Text({text:"Position"})
+    });
+    columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+      header: new sap.m.Text({text:"Height"})
+    });
+    columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+      header: new sap.m.Text({text:"Age"})
+    });
+    columns.push(oColumn);
+
+    var oTable = new sap.m.Table(this.createId("table"), {
+      columns: columns,
+			mode: sap.m.ListMode.SingleSelectMaster
+    });
+
+		var oButtonRegister = new sap.m.Button({
+			text:"Register Team",
+			type:"Accept",
+			press:[oController.registerTeam,oController]
+		});
+
+		var oBar = new sap.m.Bar({
+			contentRight:[oButtonRegister]
+		});
+
+    var oDetailPage = new sap.m.Page(this.createId("RegisterTablePage"),{
+			title: "{i18n>titleRegisterDetailView}",
+			content: [oTable],
+			showFooter:true,
+			footer:[oBar]
+		});
+
+		var masterColumns = [];
+
+		oColumn = new sap.m.Column({
+			//header: new sap.m.Text({text:"Teams"})
+		});
+		masterColumns.push(oColumn);
+
+		var oMasterTable = new sap.m.Table(this.createId("masterTable"),{
+			columns: masterColumns,
+			mode: sap.m.ListMode.SingleSelectMaster
+		});
+
+		var oMasterPage = new sap.m.Page(this.createId("myRegisterMasterPage"),{
+			title: "{i18n>titleRegisterMasterView}",
+			content: [oMasterTable]
+		});
+
+		var oSplitApp = new sap.m.SplitApp(this.createId("myRegisterSplitApp"), {
+			initialDetail: oDetailPage,
+			initialMaster: oMasterPage
+		});
+		oSplitApp.addMasterPage(oMasterPage);
+		oSplitApp.addDetailPage(oDetailPage);
+
 // common menu set up
 		var oToolHeader = new sap.tnt.ToolHeader(this.createId("HomePageHeader"),{});
 
@@ -31,7 +104,7 @@ sap.ui.jsview("aul_fantasy.view.Register", {
 		oToolHeader.addContent(oButton);
 
 		oButton = new sap.m.Button(this.createId("ButtonPlayerStats"),{
-			text: "PlayerStats",
+			text: "Player Stats",
 			press: [oController.navigateToPlayerStats,oController]
 		});
 		oToolHeader.addContent(oButton);
@@ -52,6 +125,7 @@ sap.ui.jsview("aul_fantasy.view.Register", {
 			title: "{i18n>title}",
 			showHeader: true,
 			customHeader: oToolHeader,
+			content: oSplitApp
 		});
 
 		var app = new sap.m.App(this.createId("myRegisterApp"), {
