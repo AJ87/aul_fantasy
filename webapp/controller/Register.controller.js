@@ -14,7 +14,27 @@ sap.ui.define([
 			this.getTeamsData();
 		},
 		getTeamsData: function() {
+			// initial AJAX call to populate all the teams
+			var url = "/ajax/teams";
 
+			var that = this;
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() {
+				if (this.readyState === 4) {
+					that.status = this.status;
+					if (this.status === 200) {
+
+						that._teamsData = {teams: jQuery.parseJSON(this.response)};
+
+					} else {
+						var message = "Submission failed";
+					}
+				}
+			};
+
+			xhttp.open("GET", url, true);
+			xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+			xhttp.send();
 		},
 		getMasterTableData: function() {
 			var oMasterModel = new JSONModel({
@@ -63,8 +83,16 @@ sap.ui.define([
 				})
 			}).attachSelectionChange(this.rowSelection,this);
 		},
-		getSelectedTeamData: function() {
-
+		getSelectedTeamData: function(team) {
+			// guard against nothing being set yet
+			if (!this._teamsData) {
+				return null;
+			}
+			for (var team of this._teamsData.teams) {
+				if (team.name == team) {
+					return team.players;
+				}
+			}
 		},
 		rowSelection: function() {
 
@@ -75,8 +103,11 @@ sap.ui.define([
 		navigateToHome: function() {
 			window.location.href = "/";
 		},
-		navigateToLadder: function() {
-			window.location.href = "/#/ladders";
+		navigateToFantasyTeams: function() {
+			window.location.href = "/#/fantasy-teams";
+		},
+		navigateToTeamStats: function() {
+			window.location.href = "/#/team-stats";
 		},
 		navigateToPlayerStats: function() {
 			window.location.href = "/#/player-stats";

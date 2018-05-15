@@ -29,9 +29,15 @@ sap.ui.jsview("aul_fantasy.view.Home", {
 		});
 		oToolHeader.addContent(oButton);
 
-		oButton = new sap.m.Button(this.createId("ButtonLadder"),{
-			text: "Ladder",
-			press: [oController.navigateToLadder,oController]
+		oButton = new sap.m.Button(this.createId("ButtonFantasyTeams"),{
+			text: "Fantasy Teams",
+			press: [oController.navigateToFantasyTeams,oController]
+		});
+		oToolHeader.addContent(oButton);
+
+		oButton = new sap.m.Button(this.createId("ButtonTeamStats"),{
+			text: "Team Stats",
+			press: [oController.navigateToTeamStats,oController]
 		});
 		oToolHeader.addContent(oButton);
 

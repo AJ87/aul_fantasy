@@ -16,11 +16,13 @@ var log = logger.get();
 var team = require('./lib/team.js');
 var ladder = require('./lib/ladder.js');
 var stats = require('./lib/stats.js');
+var ajax = require('./lib/ajax.js');
 
 // use the following files to process these urls
-app.use('/team', team.router);
+app.use('/fantasy-team', team.router);
 //app.use('/ladder', ladder);
 //app.use('/stats', stats);
+app.use('/ajax', ajax.router);
 
 // provide base logging
 app.use(function(req, res, next) {
@@ -36,15 +38,11 @@ database.initialise(log)
 .then(
   function fullfilled(result) {
 
-// set the db
-    team.setDB(database);
-//    ladder.setDB(database);
-//    stats.setDB(database);
-
 // set logger
     team.setLogger(log);
 //    ladder.setLogger(log);
 //    stats.setLogger(log);
+    ajax.setLogger(log);
 
 // start the server
     app.listen(port, function() {

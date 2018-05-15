@@ -84,9 +84,13 @@
 			  "name": "registerView",
 			  "target": "registerViewer"
 			},{
-				"pattern": "ladders",
-			  "name": "ladderView",
-			  "target": "ladderViewer"
+				"pattern": "fantasy-teams",
+			  "name": "fantasyTeamsView",
+			  "target": "fantasyTeamsViewer"
+				},{
+				"pattern": "team-stats",
+			  "name": "teamStatsView",
+			  "target": "teamStatsViewer"
 				},{
 					"pattern": "player-stats",
 				  "name": "statsView",
@@ -101,8 +105,12 @@
 			    "viewName": "Register",
 					"transition":"show"
 			  },
-				"ladderViewer": {
-					"viewName": "Ladder",
+				"fantasyTeamsViewer": {
+					"viewName": "FantasyTeams",
+					"transition": "show"
+				},
+				"teamStatsViewer": {
+					"viewName": "TeamStats",
 					"transition": "show"
 				},
 				"statsViewer": {

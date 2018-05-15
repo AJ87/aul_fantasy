@@ -12,8 +12,11 @@ sap.ui.define([
 		navigateToHome: function() {
 			window.location.href = "/";
 		},
-		navigateToLadder: function() {
-			window.location.href = "/#/ladders";
+		navigateToFantasyTeams: function() {
+			window.location.href = "/#/fantasy-teams";
+		},
+		navigateToTeamStats: function() {
+			window.location.href = "/#/team-stats";
 		},
 		navigateToPlayerStats: function() {
 			window.location.href = "/#/player-stats";
