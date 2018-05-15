@@ -1,0 +1,69 @@
+sap.ui.jsview("aul_fantasy.view.FantasyTeams", {
+
+	/** Specifies the Controller belonging to this View.
+	 * In the case that it is not implemented, or that "null" is returned, this View does not have a Controller.
+	 * @memberOf controller.RegoJS
+	 */
+	getControllerName: function() {
+		return "aul_fantasy.controller.FantasyTeams";
+	},
+
+	/** Is initially called once after the Controller has been instantiated. It is the place where the UI is constructed.
+	 * Since the Controller is given to this method, its event handlers can be attached right away.
+	 * @memberOf controller.RegoJS
+	 */
+	createContent: function(oController) {
+
+// common menu set up
+		var oToolHeader = new sap.tnt.ToolHeader(this.createId("HomePageHeader"),{});
+
+		var oButton = new sap.m.Button(this.createId("ButtonHome"),{
+			//text: "Home",
+			icon: "sap-icon://home",
+			press: [oController.navigateToHome,oController]
+		});
+		oToolHeader.addContent(oButton);
+
+		oButton = new sap.m.Button(this.createId("ButtonFantasyTeams"),{
+			text: "Fantasy Teams",
+			press: [oController.navigateToFantasyTeams,oController]
+		});
+		oToolHeader.addContent(oButton);
+
+		oButton = new sap.m.Button(this.createId("ButtonTeamStats"),{
+			text: "Team Stats",
+			press: [oController.navigateToTeamStats,oController]
+		});
+		oToolHeader.addContent(oButton);
+
+		oButton = new sap.m.Button(this.createId("ButtonPlayerStats"),{
+			text: "Player Stats",
+			press: [oController.navigateToPlayerStats,oController]
+		});
+		oToolHeader.addContent(oButton);
+
+		oButton = new sap.m.Button(this.createId("ButtonRegister"),{
+			text: "Register",
+			press: [oController.navigateToRegister,oController]
+		});
+		oToolHeader.addContent(oButton);
+
+		oButton = new sap.m.Button(this.createId("ButtonInfo"),{
+			text: "Info",
+			press: [oController.navigateToInfo,oController]
+		});
+		oToolHeader.addContent(oButton);
+
+		var oPage = new sap.m.Page(this.createId("FantasyTeamsPage"),{
+			title: "{i18n>title}",
+			showHeader: true,
+			customHeader: oToolHeader,
+		});
+
+		var app = new sap.m.App(this.createId("myFantasyTeamsApp"), {
+			initialPage: "oPage"
+		});
+		app.addPage(oPage);
+		return app;
+  }
+});
