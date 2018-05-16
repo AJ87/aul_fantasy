@@ -14,6 +14,108 @@ sap.ui.jsview("aul_fantasy.view.FantasyTeams", {
 	 */
 	createContent: function(oController) {
 
+		var columns = [];
+
+		var oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Name"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Team"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Sex"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Position"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Assists"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Goals"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Touches"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Drops"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Throwaways"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Blocks"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Total Score"})
+		});
+		columns.push(oColumn);
+
+		var oTable = new sap.m.Table(this.createId("table"), {
+			columns: columns,
+			mode: sap.m.ListMode.None
+		});
+
+		var oDetailPage = new sap.m.Page(this.createId("FantasyTeamsTablePage"),{
+			title: "{i18n>titleFantasyTeamsDetailView}",
+			content: [oTable],
+			showFooter:false
+		});
+
+		var masterColumns = [];
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Rank"})
+		});
+		masterColumns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Name"})
+		});
+		masterColumns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Total Score"})
+		});
+		masterColumns.push(oColumn);
+
+		var oMasterTable = new sap.m.Table(this.createId("masterTable"),{
+			columns: masterColumns,
+			mode: sap.m.ListMode.SingleSelectMaster
+		});
+
+		var oMasterPage = new sap.m.Page(this.createId("FantasyTeamsMasterPage"),{
+			title: "{i18n>titleFantasyTeamsMasterView}",
+			content: [oMasterTable]
+		});
+
+		var oSplitApp = new sap.m.SplitApp(this.createId("myFantasyTeamsSplitApp"), {
+			initialDetail: oDetailPage,
+			initialMaster: oMasterPage
+		});
+		oSplitApp.addMasterPage(oMasterPage);
+		oSplitApp.addDetailPage(oDetailPage);
+
 // common menu set up
 		var oToolHeader = new sap.tnt.ToolHeader(this.createId("HomePageHeader"),{});
 
@@ -58,6 +160,7 @@ sap.ui.jsview("aul_fantasy.view.FantasyTeams", {
 			title: "{i18n>title}",
 			showHeader: true,
 			customHeader: oToolHeader,
+			content: oSplitApp
 		});
 
 		var app = new sap.m.App(this.createId("myFantasyTeamsApp"), {

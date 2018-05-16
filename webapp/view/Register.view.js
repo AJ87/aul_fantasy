@@ -75,7 +75,7 @@ sap.ui.jsview("aul_fantasy.view.Register", {
 			mode: sap.m.ListMode.SingleSelectMaster
 		});
 
-		var oMasterPage = new sap.m.Page(this.createId("myRegisterMasterPage"),{
+		var oMasterPage = new sap.m.Page(this.createId("RegisterMasterPage"),{
 			title: "{i18n>titleRegisterMasterView}",
 			content: [oMasterTable]
 		});

@@ -80,7 +80,7 @@ sap.ui.define([
 						new sap.m.Text({text:"{quantity}"})
 					]
 				})
-			}).attachSelectionChange(this.rowSelection,this);
+			});
 
 			this.getView().byId("tableMen").bindAggregation("items",{
 				path: "/stats/men",
@@ -92,7 +92,7 @@ sap.ui.define([
 						new sap.m.Text({text:"{quantity}"})
 					]
 				})
-			}).attachSelectionChange(this.rowSelection,this);
+			});
 		},
 		getSelectedCategoryData: function(category) {
 			// guard against nothing being set yet

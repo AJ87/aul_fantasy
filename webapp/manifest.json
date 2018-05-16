@@ -99,7 +99,11 @@
 						"pattern": "info",
 					  "name": "infoView",
 					  "target": "infoViewer"
-						}],
+						},{
+							"pattern": "franchises/add-players",
+						  "name": "addPlayersView",
+						  "target": "addPlayersViewer"
+							}],
 			"targets": {
 			  "registerViewer": {
 			    "viewName": "Register",
@@ -119,6 +123,10 @@
 				},
 				"infoViewer": {
 					"viewName": "Info",
+					"transition": "show"
+				},
+				"addPlayersViewer": {
+					"viewName": "AddPlayers",
 					"transition": "show"
 				}
 			}

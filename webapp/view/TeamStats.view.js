@@ -14,6 +14,93 @@ sap.ui.jsview("aul_fantasy.view.TeamStats", {
 	 */
 	createContent: function(oController) {
 
+		var columns = [];
+
+		var oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Name"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Sex"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Position"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Assists"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Goals"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Touches"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Drops"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Throwaways"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Blocks"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Total Score"})
+		});
+		columns.push(oColumn);
+
+		var oTable = new sap.m.Table(this.createId("table"), {
+			columns: columns,
+			mode: sap.m.ListMode.None
+		});
+
+		var oDetailPage = new sap.m.Page(this.createId("TeamStatsTablePage"),{
+			title: "{i18n>titleTeamStatsDetailView}",
+			content: [oTable],
+			showFooter:false
+		});
+
+		var masterColumns = [];
+
+		oColumn = new sap.m.Column({
+			//header: new sap.m.Text({text:"Teams"})
+		});
+		masterColumns.push(oColumn);
+
+		var oMasterTable = new sap.m.Table(this.createId("masterTable"),{
+			columns: masterColumns,
+			mode: sap.m.ListMode.SingleSelectMaster
+		});
+
+		var oMasterPage = new sap.m.Page(this.createId("TeamStatsMasterPage"),{
+			title: "{i18n>titleTeamStatsMasterView}",
+			content: [oMasterTable]
+		});
+
+		var oSplitApp = new sap.m.SplitApp(this.createId("myTeamStatsSplitApp"), {
+			initialDetail: oDetailPage,
+			initialMaster: oMasterPage
+		});
+		oSplitApp.addMasterPage(oMasterPage);
+		oSplitApp.addDetailPage(oDetailPage);
+
 // common menu set up
 		var oToolHeader = new sap.tnt.ToolHeader(this.createId("HomePageHeader"),{});
 
@@ -58,6 +145,7 @@ sap.ui.jsview("aul_fantasy.view.TeamStats", {
 			title: "{i18n>title}",
 			showHeader: true,
 			customHeader: oToolHeader,
+			content: oSplitApp
 		});
 
 		var app = new sap.m.App(this.createId("myTeamStatsApp"), {

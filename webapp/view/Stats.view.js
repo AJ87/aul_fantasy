@@ -60,13 +60,13 @@ sap.ui.jsview("aul_fantasy.view.Stats", {
 		var oTableWomen = new sap.m.Table(this.createId("tableWomen"), {
 			headerText: "Women",
 			columns: columnsWomen,
-			mode: sap.m.ListMode.SingleSelectMaster
+			mode: sap.m.ListMode.None
 		});
 
 		var oTableMen = new sap.m.Table(this.createId("tableMen"), {
 			headerText: "Men",
 			columns: columnsMen,
-			mode: sap.m.ListMode.SingleSelectMaster
+			mode: sap.m.ListMode.None
 		});
 
 		var oFlexBox = new sap.m.FlexBox(this.createId("FlexBox"),{
