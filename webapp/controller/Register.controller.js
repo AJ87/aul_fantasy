@@ -83,13 +83,13 @@ sap.ui.define([
 				})
 			}).attachSelectionChange(this.rowSelection,this);
 		},
-		getSelectedTeamData: function(team) {
+		getSelectedTeamData: function(teamName) {
 			// guard against nothing being set yet
 			if (!this._teamsData) {
 				return null;
 			}
 			for (var team of this._teamsData.teams) {
-				if (team.name == team) {
+				if (team.name == teamName) {
 					return team.players;
 				}
 			}

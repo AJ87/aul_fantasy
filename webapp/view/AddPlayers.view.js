@@ -32,7 +32,7 @@ sap.ui.jsview("aul_fantasy.view.AddPlayers", {
     columns.push(oColumn);
 
 		oColumn = new sap.m.Column({
-      header: new sap.m.Text({text:"Height"})
+      header: new sap.m.Text({text:"Height (cm)"})
     });
     columns.push(oColumn);
 
@@ -41,12 +41,52 @@ sap.ui.jsview("aul_fantasy.view.AddPlayers", {
     });
     columns.push(oColumn);
 
+		var oButtonEdit = new sap.m.Button(this.createId("buttonEdit"),{
+			text: "Edit",
+			type: "Transparent",
+			press: [oController.onEdit,oController]
+		});
+
+		var oButtonAddPlayer = new sap.m.Button(this.createId("buttonAddPlayer"), {
+			text: "Add Player",
+			type: "Transparent",
+			visible: false,
+			press: [oController.onAddPlayer,oController]
+		});
+
+		var oButtonSave = new sap.m.Button(this.createId("buttonSave"),{
+			text: "Save",
+			type: "Transparent",
+			visible: false,
+			press: [oController.onSave,oController]
+		});
+
+		var oButtonCancel = new sap.m.Button(this.createId("buttonCancel"),{
+			text: "Cancel",
+			type: "Transparent",
+			visible: false,
+			press: [oController.onCancel,oController]
+		});
+
+		var oTitle = new sap.m.Title(this.createId("tableTitle"), {
+			text: "Adelaide Dragons",
+			level: "H2"
+		});
+
+		var oSpacer = new sap.m.ToolbarSpacer();
+
+		var oHeaderToolbar = new sap.m.OverflowToolbar(this.createId("overflowToolbar"), {
+			content: [oTitle, oSpacer, oButtonEdit, oButtonAddPlayer, oButtonSave, oButtonCancel]
+		});
+
     var oTable = new sap.m.Table(this.createId("table"), {
       columns: columns,
-			mode: sap.m.ListMode.SingleSelectMaster
+			growing: true,
+			headerToolbar: oHeaderToolbar,
+			mode: sap.m.ListMode.SingleSelectNone
     });
 
-		var oButtonUpdate = new sap.m.Button({
+		var oButtonUpdate = new sap.m.Button(this.createId("buttonUpdate"), {
 			text:"Update Team",
 			type:"Accept",
 			press:[oController.updateTeam,oController]
