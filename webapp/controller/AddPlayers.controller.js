@@ -131,7 +131,13 @@ sap.ui.define([
 				if (team.name == teamName) {
 					// only allow up to 14 players
 					if (addPlayer && team.players.length < 14) {
-						team.players.push({});
+						team.players.push({
+							name: "",
+							sex: "Male",
+							position: "Handler",
+							height: "",
+							age: ""
+						});
 					}
 					return team.players;
 				}
@@ -177,9 +183,13 @@ sap.ui.define([
 					that.status = this.status;
 					if (this.status === 200) {
 
+						var msg = "Successfully updated database";
+						sap.m.MessageToast.show(msg);
 
 					} else {
 
+						msg = "Failed to update database. Try again or contact administrator";
+						sap.m.MessageToast.show(msg);
 
 					}
 				}

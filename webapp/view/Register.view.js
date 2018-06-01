@@ -46,21 +46,34 @@ sap.ui.jsview("aul_fantasy.view.Register", {
 			mode: sap.m.ListMode.SingleSelectMaster
     });
 
-		var oButtonRegister = new sap.m.Button({
+		var oButtonRegister = new sap.m.Button(this.createId("buttonRegister"),{
 			text:"Register Team",
 			type:"Accept",
+			enabled:false,
 			press:[oController.registerTeam,oController]
 		});
 
+		var oButtonAccept = new sap.m.Button(this.createId("buttonAccept"),{
+			text:"Submit",
+			type:"Accept",
+			visible:false,
+			press:[oController.handleRegisterTeam,oController]
+		});
+
+		var oButtonCancel = new sap.m.Button(this.createId("buttonCancel"),{
+			text:"Cancel",
+			type:"Reject",
+			visible:false,
+			press:[oController.handleCancelRegister,oController]
+		});
+
 		var oBar = new sap.m.Bar({
-			contentRight:[oButtonRegister]
+			contentRight:[oButtonAccept,oButtonCancel,oButtonRegister]
 		});
 
     var oDetailPage = new sap.m.Page(this.createId("RegisterTablePage"),{
 			title: "{i18n>titleRegisterDetailView}",
-			content: [oTable],
-			showFooter:true,
-			footer:[oBar]
+			content: [oTable]
 		});
 
 		var masterColumns = [];
@@ -131,7 +144,9 @@ sap.ui.jsview("aul_fantasy.view.Register", {
 			title: "{i18n>title}",
 			showHeader: true,
 			customHeader: oToolHeader,
-			content: oSplitApp
+			content: oSplitApp,
+			showFooter: true,
+			footer: [oBar]
 		});
 
 		var app = new sap.m.App(this.createId("myRegisterApp"), {
