@@ -22,24 +22,34 @@ sap.ui.jsview("aul_fantasy.view.InputStats", {
     columns.push(oColumn);
 
 		oColumn = new sap.m.Column({
-      header: new sap.m.Text({text:"Sex"})
+      header: new sap.m.Text({text:"Goals"})
     });
     columns.push(oColumn);
 
     oColumn = new sap.m.Column({
-      header: new sap.m.Text({text:"Position"})
+      header: new sap.m.Text({text:"Assists"})
     });
     columns.push(oColumn);
 
 		oColumn = new sap.m.Column({
-      header: new sap.m.Text({text:"Height (cm)"})
+      header: new sap.m.Text({text:"Touches"})
     });
     columns.push(oColumn);
 
 		oColumn = new sap.m.Column({
-      header: new sap.m.Text({text:"Age"})
+      header: new sap.m.Text({text:"Drops"})
     });
     columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Throwaways"})
+		});
+		columns.push(oColumn);
+
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Blocks"})
+		});
+		columns.push(oColumn);
 
 		var oButtonEdit = new sap.m.Button(this.createId("buttonEdit"),{
 			text: "Edit",
@@ -91,9 +101,7 @@ sap.ui.jsview("aul_fantasy.view.InputStats", {
 
     var oDetailPage = new sap.m.Page(this.createId("InputStatsTablePage"),{
 			title: "{i18n>titleInputStatsDetailView}",
-			content: [oTable],
-			showFooter:true,
-			footer:[oBar]
+			content: [oTable]
 		});
 
 		var masterColumns = [];
@@ -115,13 +123,96 @@ sap.ui.jsview("aul_fantasy.view.InputStats", {
 
 		var oSplitApp = new sap.m.SplitApp(this.createId("myInputStatsSplitApp"), {
 			initialDetail: oDetailPage,
-			initialMaster: oMasterPage,
-			showNavButton:true,
-			navButtonTap:[oController.backToRounds,oController]
+			initialMaster: oMasterPage
 		});
 		oSplitApp.addMasterPage(oMasterPage);
 		oSplitApp.addDetailPage(oDetailPage);
 
-		return oSplitApp;
+		var oSplitAppPage = new sap.m.Page(this.createId("splitAppPage"),{
+			showNavButton:true,
+			navButtonTap:[oController.backToRounds,oController],
+			content: [oSplitApp],
+			showFooter:true,
+			footer:[oBar]
+		});
+
+		var button1 = new sap.m.Button(this.createId("Button1"),{
+			text: "Round 1",
+			press: [oController.navigateToRound1,oController]
+		});
+
+		var button2 = new sap.m.Button(this.createId("Button2"),{
+			text: "Round 2",
+			press: [oController.navigateToRound2,oController]
+		});
+
+		var button3 = new sap.m.Button(this.createId("Button3"),{
+			text: "Round 3",
+			press: [oController.navigateToRound3,oController]
+		});
+
+		var button4 = new sap.m.Button(this.createId("Button4"),{
+			text: "Round 4",
+			press: [oController.navigateToRound4,oController]
+		});
+
+		var button5 = new sap.m.Button(this.createId("Button5"),{
+			text: "Round 5",
+			press: [oController.navigateToRound5,oController]
+		});
+
+		var panel1 = new sap.m.Panel({
+			class:"SapUiResponsiveMargin",
+			width:"100%",
+			justifyContent: "Center",
+			content:[button1]
+		});
+
+		var panel2 = new sap.m.Panel({
+			class:"SapUiResponsiveMargin",
+			width:"100%",
+			content:[button2]
+		});
+
+		var panel3 = new sap.m.Panel({
+			class:"SapUiResponsiveMargin",
+			width:"100%",
+			content:[button3]
+		});
+
+		var panel4 = new sap.m.Panel({
+			class:"SapUiResponsiveMargin",
+			width:"100%",
+			content:[button4]
+		});
+
+		var panel5 = new sap.m.Panel({
+			class:"SapUiResponsiveMargin",
+			width:"100%",
+			content:[button5]
+		});
+
+		var oFlexBox = new sap.m.FlexBox(this.createId("FlexBox"),{
+			alignItems: "Center",
+			direction: "Column",
+			items: [panel1,panel2,panel3,panel4,panel5]
+		});
+
+		var oVertLayout = new sap.ui.layout.VerticalLayout({
+			width: "100%",
+			content: [oFlexBox]
+		});
+
+		var oPage = new sap.m.Page(this.createId("InputStatsPage"),{
+			title: "{i18n>titleInputStats}",
+			content: [oVertLayout]
+		});
+
+		var app = new sap.m.App(this.createId("myApp"), {
+			initialPage: "oPage"
+		});
+		app.addPage(oPage);
+		app.addPage(oSplitAppPage);
+		return app;
   }
 });

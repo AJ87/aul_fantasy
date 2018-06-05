@@ -6,7 +6,10 @@ sap.ui.define([
 
   return Controller.extend("aul_fantasy.controller.InputStats", {
 		onInit: function() {
-			this._oApp = this.getView().byId("myInputStatsSplitApp");
+			this._oApp = this.getView().byId("myApp");
+			this._oSplitApp = this.getView().byId("myInputStatsSplitApp");
+			this._oSplitAppPage = this.getView().byId("splitAppPage");
+			this._oRoundPage = this.getView().byId("InputStatsPage");
 			this._oDetailPage = this.getView().byId("InputStatsTablePage");
 			this._oMasterPage = this.getView().byId("InputStatsMasterPage");
 			this._oMasterTable = this.getView().byId("masterTable");
@@ -14,7 +17,6 @@ sap.ui.define([
 			this._oTableTitle = this.getView().byId("tableTitle");
 			this._oTable = this.getView().byId("table");
 			this._oButtonEdit = this.getView().byId("buttonEdit");
-			this._oButtonAddPlayer = this.getView().byId("buttonAddPlayer");
 			this._oButtonSave = this.getView().byId("buttonSave");
 			this._oButtonCancel = this.getView().byId("buttonCancel");
 			this._oButtonUpdate = this.getView().byId("buttonUpdate");
@@ -22,39 +24,23 @@ sap.ui.define([
 			this._oReadOnlyTemplate = new sap.m.ColumnListItem({
 							cells: [
 								new sap.m.Text({text:"{name}"}),
-								new sap.m.Text({text:"{sex}"}),
-								new sap.m.Text({text:"{position}"}),
-								new sap.m.Text({text:"{height}"}),
-								new sap.m.Text({text:"{age}"})
+								new sap.m.Text({text:"{goals}"}),
+								new sap.m.Text({text:"{assists}"}),
+								new sap.m.Text({text:"{touches}"}),
+								new sap.m.Text({text:"{drops}"}),
+								new sap.m.Text({text:"{throwaways}"}),
+								new sap.m.Text({text:"{blocks}"})
 							]
 						});
 			this._oEditableTemplate = new sap.m.ColumnListItem({
 							cells: [
-								new sap.m.Input({
-									value: "{name}"
-								}), new sap.m.Select({
-									selectedKey: "{sex}",
-									items: [{
-										key:"Male",
-										text:"Male"
-									},{
-										key:"Female",
-										text:"Female"
-									}]
-								}), new sap.m.Select({
-									selectedKey: "{position}",
-									items: [{
-										key:"Handler",
-										text:"Handler"
-									},{
-										key:"Cutter",
-										text:"Cutter"
-									}]
-								}), new sap.m.Input({
-									value: "{height}"
-								}), new sap.m.Input({
-									value: "{age}"
-								})
+								new sap.m.Text({text:"{name}"}),
+								new sap.m.Input({value: "{goals}"}),
+								new sap.m.Input({value: "{assists}"}),
+								new sap.m.Input({value: "{touches}"}),
+								new sap.m.Input({value: "{drops}"}),
+								new sap.m.Input({value: "{throwaways}"}),
+								new sap.m.Input({value: "{blocks}"})
 							]
 						});
 
@@ -115,13 +101,13 @@ sap.ui.define([
 			this.setTeamData(sItem);
 			this.reset();
 		},
-		setTeamData: function(team, addPlayer) {
-			var selectedTeam = this.getSelectedTeamData(team, addPlayer);
+		setTeamData: function(team) {
+			var selectedTeam = this.getSelectedTeamData(team);
 
 			var oModel = new JSONModel({players: selectedTeam});
 			this.getView().setModel(oModel);
 		},
-		getSelectedTeamData: function(teamName, addPlayer) {
+		getSelectedTeamData: function(teamName) {
 			this._currentTeam = teamName;
 			// guard against nothing being set yet
 			if (!this._teamsData) {
@@ -129,16 +115,6 @@ sap.ui.define([
 			}
 			for (var team of this._teamsData.teams) {
 				if (team.name == teamName) {
-					// only allow up to 14 players
-					if (addPlayer && team.players.length < 14) {
-						team.players.push({
-							name: "",
-							sex: "Male",
-							position: "Handler",
-							height: "",
-							age: ""
-						});
-					}
 					return team.players;
 				}
 			}
@@ -153,7 +129,6 @@ sap.ui.define([
 		},
 		onEdit: function(oEvent) {
 			this._oButtonEdit.setVisible(false);
-			this._oButtonAddPlayer.setVisible(true);
 			this._oButtonSave.setVisible(true);
 			this._oButtonCancel.setVisible(true);
 			this._oButtonUpdate.setEnabled(false);
@@ -169,12 +144,9 @@ sap.ui.define([
 			this.setTeamData(this._currentTeam);
 			this.reset();
 		},
-		onAddPlayer: function(oEvent) {
-			this.setTeamData(this._currentTeam, true);
-		},
 		updateTeam: function(oEvent) {
 			// initial AJAX call to populate all the teams
-			var url = `/ajax/team/${this._currentTeam}`;
+			var url = `/ajax/stats/${this._currentTeam}`;
 
 			var that = this;
 			var xhttp = new XMLHttpRequest();
@@ -201,12 +173,38 @@ sap.ui.define([
 		},
 		reset: function() {
 			this._oButtonEdit.setVisible(true);
-			this._oButtonAddPlayer.setVisible(false);
 			this._oButtonSave.setVisible(false);
 			this._oButtonCancel.setVisible(false);
 			this._oButtonUpdate.setEnabled(true);
 			this._oMasterTable.setMode("SingleSelectMaster");
 			this.rebindTable(this._oReadOnlyTemplate, "Navigation");
+		},
+		navigateToRound1: function() {
+			this._round = 1;
+			this.navigateToSplitApp();
+		},
+		navigateToRound2: function() {
+			this._round = 2;
+			this.navigateToSplitApp();
+		},
+		navigateToRound3: function() {
+			this._round = 3;
+			this.navigateToSplitApp();
+		},
+		navigateToRound4: function() {
+			this._round = 4;
+			this.navigateToSplitApp();
+		},
+		navigateToRound5: function() {
+			this._round = 5;
+			this.navigateToSplitApp();
+		},
+		navigateToSplitApp: function() {
+			this._oSplitAppPage.setTitle(`Input Stats for Round ${this._round}`);
+			this._oApp.to(this._oSplitAppPage);
+		},
+		backToRounds: function() {
+			this._oApp.backToPage(this._oRoundPage.getId());
 		}
   });
 });
