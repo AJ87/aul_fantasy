@@ -186,7 +186,7 @@ sap.ui.define([
 						}
 
 						// if team full enable register button
-						if (that._maleCount === 1 && that._femaleCount === 1) {
+						if (that._maleCount === 6 && that._femaleCount === 6) {
 							that._oRegisterButton.setEnabled(true);
 						}
 
@@ -231,7 +231,7 @@ sap.ui.define([
 			// AJAX call to register a user's team
 			var data = JSON.parse(this.getView().getModel("userModel").getJSON());
 			data.players = JSON.parse(this.getView().getModel().getJSON()).players;
-			var url = `/ajax/fantasy-team/${data.email}`;
+			var url = `/ajax/fantasy-team/${data.teamName}`;
 
 			var that = this;
 			var xhttp = new XMLHttpRequest();
@@ -243,7 +243,8 @@ sap.ui.define([
 						sap.m.MessageToast.show(submitSuccess);
 
 					} else {
-						var message = "Submission failed";
+						var submitFail = `Updated failed. ${this.response}`;
+						sap.m.MessageToast.show(submitFail);
 					}
 				}
 			};

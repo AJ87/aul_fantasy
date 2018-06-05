@@ -87,23 +87,27 @@
 				"pattern": "fantasy-teams",
 			  "name": "fantasyTeamsView",
 			  "target": "fantasyTeamsViewer"
-				},{
+			},{
 				"pattern": "team-stats",
 			  "name": "teamStatsView",
 			  "target": "teamStatsViewer"
-				},{
-					"pattern": "player-stats",
-				  "name": "statsView",
-				  "target": "statsViewer"
-					},{
-						"pattern": "info",
-					  "name": "infoView",
-					  "target": "infoViewer"
-						},{
-							"pattern": "franchises/add-players",
-						  "name": "addPlayersView",
-						  "target": "addPlayersViewer"
-							}],
+			},{
+				"pattern": "player-stats",
+				"name": "statsView",
+				"target": "statsViewer"
+			},{
+				"pattern": "info",
+			  "name": "infoView",
+				"target": "infoViewer"
+			},{
+				"pattern": "franchises/add-players",
+				"name": "addPlayersView",
+				"target": "addPlayersViewer"
+			},{
+				"pattern": "franchises/input-stats",
+				"name": "inputStatsView",
+				"target": "inputStatsViewer"
+			}],
 			"targets": {
 			  "registerViewer": {
 			    "viewName": "Register",
@@ -127,6 +131,10 @@
 				},
 				"addPlayersViewer": {
 					"viewName": "AddPlayers",
+					"transition": "show"
+				},
+				"inputStatsViewer": {
+					"viewName": "InputStats",
 					"transition": "show"
 				}
 			}
