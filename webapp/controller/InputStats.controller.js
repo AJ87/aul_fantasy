@@ -35,22 +35,21 @@ sap.ui.define([
 			this._oEditableTemplate = new sap.m.ColumnListItem({
 							cells: [
 								new sap.m.Text({text:"{name}"}),
-								new sap.m.Input({value: "{goals}"}),
-								new sap.m.Input({value: "{assists}"}),
-								new sap.m.Input({value: "{touches}"}),
-								new sap.m.Input({value: "{drops}"}),
-								new sap.m.Input({value: "{throwaways}"}),
-								new sap.m.Input({value: "{blocks}"})
+								new sap.m.Input({value: "{goals}", type: 'Number'}),
+								new sap.m.Input({value: "{assists}", type: 'Number'}),
+								new sap.m.Input({value: "{touches}", type: 'Number'}),
+								new sap.m.Input({value: "{drops}", type: 'Number'}),
+								new sap.m.Input({value: "{throwaways}", type: 'Number'}),
+								new sap.m.Input({value: "{blocks}", type: 'Number'})
 							]
 						});
 
 			this.getMasterTableData();
-			this.getTeamsData();
 			this.rebindTable(this._oReadOnlyTemplate, "Navigation");
 		},
 		getTeamsData: function() {
 			// initial AJAX call to populate all the teams
-			var url = "/ajax/teams";
+			var url = `/ajax/stats/round/${this._round}`;
 
 			var that = this;
 			var xhttp = new XMLHttpRequest();
@@ -97,12 +96,12 @@ sap.ui.define([
 			var oMasterSelectedItem = oEvent.getParameter("listItem");
 			var sItem = oMasterSelectedItem.getBindingContext("masterModel").getProperty("team");
 
-			this._oTableTitle.setText(sItem);
 			this.setTeamData(sItem);
 			this.reset();
 		},
 		setTeamData: function(team) {
 			var selectedTeam = this.getSelectedTeamData(team);
+			this._oTableTitle.setText(team);
 
 			var oModel = new JSONModel({players: selectedTeam});
 			this.getView().setModel(oModel);
@@ -146,7 +145,7 @@ sap.ui.define([
 		},
 		updateTeam: function(oEvent) {
 			// initial AJAX call to populate all the teams
-			var url = `/ajax/stats/${this._currentTeam}`;
+			var url = `/ajax/stats/round/${this._round}/team/${this._currentTeam}`;
 
 			var that = this;
 			var xhttp = new XMLHttpRequest();
@@ -181,22 +180,27 @@ sap.ui.define([
 		},
 		navigateToRound1: function() {
 			this._round = 1;
+			this.getTeamsData();
 			this.navigateToSplitApp();
 		},
 		navigateToRound2: function() {
 			this._round = 2;
+			this.getTeamsData();
 			this.navigateToSplitApp();
 		},
 		navigateToRound3: function() {
 			this._round = 3;
+			this.getTeamsData();
 			this.navigateToSplitApp();
 		},
 		navigateToRound4: function() {
 			this._round = 4;
+			this.getTeamsData();
 			this.navigateToSplitApp();
 		},
 		navigateToRound5: function() {
 			this._round = 5;
+			this.getTeamsData();
 			this.navigateToSplitApp();
 		},
 		navigateToSplitApp: function() {
@@ -204,6 +208,7 @@ sap.ui.define([
 			this._oApp.to(this._oSplitAppPage);
 		},
 		backToRounds: function() {
+			this._oMasterTable.removeSelections();
 			this._oApp.backToPage(this._oRoundPage.getId());
 		}
   });
