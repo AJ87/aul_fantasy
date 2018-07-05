@@ -15,7 +15,7 @@ sap.ui.define([
 		},
 		getStatsData: function() {
 			// initial AJAX call to populate all the stats
-			var url = "/ajax/stats";
+			var url = "/ajax/stats/categories";
 
 			var that = this;
 			var xhttp = new XMLHttpRequest();

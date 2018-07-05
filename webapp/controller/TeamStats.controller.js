@@ -15,7 +15,7 @@ sap.ui.define([
 		},
 		getTeamsData: function() {
 			// initial AJAX call to populate all the teams
-			var url = "/ajax/teams";
+			var url = "/ajax/stats/teams";
 
 			var that = this;
 			var xhttp = new XMLHttpRequest();
@@ -82,18 +82,19 @@ sap.ui.define([
 						new sap.m.Text({text:"{touches}"}),
 						new sap.m.Text({text:"{drops}"}),
 						new sap.m.Text({text:"{throwaways}"}),
-						new sap.m.Text({text:"{blocks}"})
+						new sap.m.Text({text:"{blocks}"}),
+						new sap.m.Text({text:"{totalScore}"})
 					]
 				})
 			});
 		},
-		getSelectedTeamData: function(team) {
+		getSelectedTeamData: function(teamName) {
 			// guard against nothing being set yet
 			if (!this._teamsData) {
 				return null;
 			}
 			for (var team of this._teamsData.teams) {
-				if (team.name == team) {
+				if (team.name == teamName) {
 					return team.players;
 				}
 			}
