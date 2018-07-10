@@ -25,6 +25,7 @@ sap.ui.define([
 					if (this.status === 200) {
 
 						that._statsData = {stats: jQuery.parseJSON(this.response)};
+						that.setCategoryData('totalScore');
 
 					} else {
 						var message = "Submission failed";
@@ -61,17 +62,43 @@ sap.ui.define([
 			var oMasterSelectedItem = oEvent.getParameter("listItem");
 			var sItem = oMasterSelectedItem.getBindingContext("masterModel").getProperty("category");
 
+			let category;
+
+			switch (sItem) {
+				case 'Total Score':
+					category = 'totalScore';
+					break;
+				case 'Assists':
+					category = 'assists';
+					break;
+				case 'Goals':
+					category = 'goals';
+					break;
+				case 'Touches':
+					category = 'touches';
+					break;
+				case 'Drops':
+					category = 'drops';
+					break;
+				case 'Throwaways':
+					category = 'throwaways';
+					break;
+				case 'Blocks':
+					category = 'blocks';
+					break;
+			}
+
 			this._oDetailPage.setTitle(sItem);
-			this.setCategoryData(sItem);
+			this.setCategoryData(category);
 		},
 		setCategoryData: function(category) {
 			var selectedCategory = this.getSelectedCategoryData(category);
 
-			var oModel = new JSONModel({stats: selectedCategory});
+			var oModel = new JSONModel(selectedCategory);
 			this.getView().setModel(oModel);
 
 			this.getView().byId("tableWomen").bindAggregation("items",{
-				path: "/stats/women",
+				path: "/women",
 				template: new sap.m.ColumnListItem({
 					cells: [
 						new sap.m.Text({text:"{rank}"}),
@@ -83,7 +110,7 @@ sap.ui.define([
 			});
 
 			this.getView().byId("tableMen").bindAggregation("items",{
-				path: "/stats/men",
+				path: "/men",
 				template: new sap.m.ColumnListItem({
 					cells: [
 						new sap.m.Text({text:"{rank}"}),
@@ -101,7 +128,7 @@ sap.ui.define([
 			}
 			for (var stat of this._statsData.stats) {
 				if (stat.category == category) {
-					return stat.players;
+					return stat;
 				}
 			}
 		},

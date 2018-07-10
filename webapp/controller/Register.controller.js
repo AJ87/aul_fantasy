@@ -174,6 +174,7 @@ sap.ui.define([
 						var item = that._oSelectedItem.getBindingContext();
 						that._yourTeam.push({
 							name: item.getProperty("name"),
+							teamName: that._oDetailPage.getTitle(),
 							sex: item.getProperty("sex"),
 							position: item.getProperty("position"),
 							height: item.getProperty("height"),

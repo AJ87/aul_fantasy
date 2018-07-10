@@ -72,7 +72,7 @@ sap.ui.jsview("aul_fantasy.view.Stats", {
 		var oFlexBox = new sap.m.FlexBox(this.createId("FlexBox"),{
 			alignItems: "Start",
 			justifyContent: "Center",
-			height: "100px",
+			height: "100%",
 			items: [oTableWomen,oTableMen]
 		});
 

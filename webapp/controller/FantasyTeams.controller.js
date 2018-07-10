@@ -24,17 +24,17 @@ sap.ui.define([
 					if (this.status === 200) {
 
 						that.oMasterModel = {ladder: jQuery.parseJSON(this.response)};
-						that.getView().setModel(oMasterModel,"masterModel");
-						that.getTeamData(that.oMasterModel.ladder[0].id);
-						that._oDetailPage.setTitle(that.oMasterModel.ladder[0].name);
+						that.getView().setModel(new JSONModel(that.oMasterModel),"masterModel");
+						that.getTeamData(that.oMasterModel.ladder[0].teamName);
+						that._oDetailPage.setTitle(that.oMasterModel.ladder[0].teamName);
 
 						that.getView().byId("masterTable").bindAggregation("items",{
 							path: "masterModel>/ladder",
 							template: new sap.m.ColumnListItem({
 								cells: [
 									new sap.m.Text({text:"{masterModel>rank}"}),
-									new sap.m.Text({text:"{masterModel>name}"}),
-									new sap.m.Text({text:"{masterModel>score}"})
+									new sap.m.Text({text:"{masterModel>teamName}"}),
+									new sap.m.Text({text:"{masterModel>totalScore}"})
 								]
 							})
 						}).attachSelectionChange(that.masterRowSelection,that);
@@ -51,11 +51,11 @@ sap.ui.define([
 		},
 		masterRowSelection: function(oEvent) {
 			var oMasterSelectedItem = oEvent.getParameter("listItem");
-			var sItem = oMasterSelectedItem.getBindingContext("masterModel").getProperty("name");
+			var sItem = oMasterSelectedItem.getBindingContext("masterModel").getProperty("teamName");
 			var teamID = oMasterSelectedItem.getBindingContext("masterModel").getProperty("id");
 
 			this._oDetailPage.setTitle(sItem);
-			this.getTeamData(teamID);
+			this.getTeamData(sItem);
 		},
 		getTeamData: function(teamID) {
 			if (!teamID) {
@@ -80,7 +80,7 @@ sap.ui.define([
 							template: new sap.m.ColumnListItem({
 								cells: [
 									new sap.m.Text({text:"{name}"}),
-									new sap.m.Text({text:"{team}"}),
+									new sap.m.Text({text:"{teamName}"}),
 									new sap.m.Text({text:"{sex}"}),
 									new sap.m.Text({text:"{position}"}),
 									new sap.m.Text({text:"{assists}"}),
@@ -88,7 +88,8 @@ sap.ui.define([
 									new sap.m.Text({text:"{touches}"}),
 									new sap.m.Text({text:"{drops}"}),
 									new sap.m.Text({text:"{throwaways}"}),
-									new sap.m.Text({text:"{blocks}"})
+									new sap.m.Text({text:"{blocks}"}),
+									new sap.m.Text({text:"{totalScore}"})
 								]
 							})
 						});
