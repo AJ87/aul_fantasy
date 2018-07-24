@@ -5,7 +5,7 @@ var app = express();
 var logger = require('./lib/logger.js');
 
 // constants
-const port = 3000; // 3000 for testing and 80 for AWS
+const port = 80; // 3000 for testing and 80 for AWS
 const appName = 'AULFantasySite';
 
 // set up logger
