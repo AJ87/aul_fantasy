@@ -41,6 +41,11 @@ sap.ui.jsview("aul_fantasy.view.AddPlayers", {
     });
     columns.push(oColumn);
 
+		oColumn = new sap.m.Column({
+      header: new sap.m.Text({text:"Player Number"})
+    });
+    columns.push(oColumn);
+
 		var oButtonEdit = new sap.m.Button(this.createId("buttonEdit"),{
 			text: "Edit",
 			type: "Transparent",

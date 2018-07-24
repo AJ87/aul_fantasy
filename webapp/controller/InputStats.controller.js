@@ -133,6 +133,18 @@ sap.ui.define([
 			this._oButtonUpdate.setEnabled(false);
 			this._oMasterTable.setMode("None");
 			this._oldTeamsData = jQuery.extend(true,{},this._teamsData);
+			// set any nulls to 0
+			var categories = ['assists','goals','touches','drops','throwaways','blocks','totalScore'];
+			for (let team of this._teamsData.teams) {
+				for (let player of team.players) {
+					categories.map(x => {
+						if (player[x] === undefined) {
+							player[x] = 0;
+						}
+						return x;
+					});
+				}
+			}
 			this.rebindTable(this._oEditableTemplate, "Edit");
 		},
 		onSave: function(oEvent) {

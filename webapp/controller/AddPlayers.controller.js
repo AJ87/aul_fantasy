@@ -25,7 +25,8 @@ sap.ui.define([
 								new sap.m.Text({text:"{sex}"}),
 								new sap.m.Text({text:"{position}"}),
 								new sap.m.Text({text:"{height}"}),
-								new sap.m.Text({text:"{age}"})
+								new sap.m.Text({text:"{age}"}),
+								new sap.m.Text({text:"{playerNumber}"})
 							]
 						});
 			this._oEditableTemplate = new sap.m.ColumnListItem({
@@ -54,6 +55,8 @@ sap.ui.define([
 									value: "{height}"
 								}), new sap.m.Input({
 									value: "{age}"
+								}), new sap.m.Input({
+									value: "{playerNumber}"
 								})
 							]
 						});
