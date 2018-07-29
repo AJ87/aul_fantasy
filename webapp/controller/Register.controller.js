@@ -104,7 +104,8 @@ sap.ui.define([
 						new sap.m.Text({text:"{sex}"}),
 						new sap.m.Text({text:"{position}"}),
 						new sap.m.Text({text:"{height}"}),
-						new sap.m.Text({text:"{age}"})
+						new sap.m.Text({text:"{age}"}),
+						new sap.m.Text({text:"{playerNumber}"})
 					]
 				})
 			}).attachSelectionChange(this.rowSelection,this);

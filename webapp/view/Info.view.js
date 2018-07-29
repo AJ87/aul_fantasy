@@ -20,7 +20,7 @@ sap.ui.jsview("aul_fantasy.view.Info", {
 		});
 
 		var oText1 = new sap.m.Text({
-			text:"We use the formula: Goals + Assists + Blocks - Drops - Throwaways"
+			text:"We use the formula: 25*Goals + 15*Assists + 5*Touches + 50*Blocks - 50*Drops - 30*Throwaways"
 		});
 
 		var oPanel = new sap.m.Panel({

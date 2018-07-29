@@ -41,6 +41,11 @@ sap.ui.jsview("aul_fantasy.view.Register", {
     });
     columns.push(oColumn);
 
+		oColumn = new sap.m.Column({
+			header: new sap.m.Text({text:"Player Number"})
+		});
+		columns.push(oColumn);
+
     var oTable = new sap.m.Table(this.createId("table"), {
       columns: columns,
 			mode: sap.m.ListMode.SingleSelectMaster
