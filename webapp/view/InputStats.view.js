@@ -78,8 +78,14 @@ sap.ui.jsview("aul_fantasy.view.InputStats", {
 
 		var oSpacer = new sap.m.ToolbarSpacer();
 
+		var oButtonUpdate = new sap.m.Button(this.createId("buttonUpdate"), {
+			text:"Update Team",
+			type:"Accept",
+			press:[oController.updateTeam,oController]
+		});
+
 		var oHeaderToolbar = new sap.m.OverflowToolbar(this.createId("overflowToolbar"), {
-			content: [oTitle, oSpacer, oButtonEdit, oButtonSave, oButtonCancel]
+			content: [oTitle, oSpacer, oButtonEdit, oButtonSave, oButtonCancel, oButtonUpdate]
 		});
 
     var oTable = new sap.m.Table(this.createId("table"), {
@@ -88,16 +94,6 @@ sap.ui.jsview("aul_fantasy.view.InputStats", {
 			headerToolbar: oHeaderToolbar,
 			mode: sap.m.ListMode.SingleSelectNone
     });
-
-		var oButtonUpdate = new sap.m.Button(this.createId("buttonUpdate"), {
-			text:"Update Team",
-			type:"Accept",
-			press:[oController.updateTeam,oController]
-		});
-
-		var oBar = new sap.m.Bar({
-			contentRight:[oButtonUpdate]
-		});
 
     var oDetailPage = new sap.m.Page(this.createId("InputStatsTablePage"),{
 			title: "{i18n>titleInputStatsDetailView}",
@@ -131,9 +127,7 @@ sap.ui.jsview("aul_fantasy.view.InputStats", {
 		var oSplitAppPage = new sap.m.Page(this.createId("splitAppPage"),{
 			showNavButton:true,
 			navButtonTap:[oController.backToRounds,oController],
-			content: [oSplitApp],
-			showFooter:true,
-			footer:[oBar]
+			content: [oSplitApp]
 		});
 
 		var button1 = new sap.m.Button(this.createId("Button1"),{
