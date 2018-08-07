@@ -10,9 +10,9 @@ logger.initialise(appName);
 var log = logger.get();
 
 // server
-//let filePath = '/aul/fantasy/';
+let filePath = '/aul/fantasy/aul_fantasy/AULUserList.csv';
 // local path
-let filePath = '/Users/AJ87/Desktop/AULUserList.csv';
+//let filePath = '/Users/AJ87/Desktop/AULUserList.csv';
 
 let table = 'email_table';
 
