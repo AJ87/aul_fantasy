@@ -35,7 +35,7 @@ sap.ui.jsview("aul_fantasy.view.Home", {
 		});
 
 		var oText2 = new sap.m.Text({
-			text:"To register a fantasy team you will need to have become a member of a franchise. Use the same email you used in the process on the Register page when you submit your fantasy team."
+			text:"To register a fantasy team you will need to be a member of a franchise. Use the same email you used in the process on the Register page when you submit your fantasy team."
 		});
 
 		var oPanel2 = new sap.m.Panel({
