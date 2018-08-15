@@ -48,6 +48,7 @@ sap.ui.jsview("aul_fantasy.view.Register", {
 
     var oTable = new sap.m.Table(this.createId("table"), {
       columns: columns,
+			fixedLayout: false,
 			mode: sap.m.ListMode.SingleSelectMaster
     });
 
@@ -136,12 +137,6 @@ sap.ui.jsview("aul_fantasy.view.Register", {
 		oButton = new sap.m.Button(this.createId("ButtonRegister"),{
 			text: "Register",
 			press: [oController.navigateToRegister,oController]
-		});
-		oToolHeader.addContent(oButton);
-
-		oButton = new sap.m.Button(this.createId("ButtonInfo"),{
-			text: "Info",
-			press: [oController.navigateToInfo,oController]
 		});
 		oToolHeader.addContent(oButton);
 

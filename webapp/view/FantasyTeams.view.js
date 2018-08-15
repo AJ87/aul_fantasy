@@ -17,68 +17,97 @@ sap.ui.jsview("aul_fantasy.view.FantasyTeams", {
 		var columns = [];
 
 		var oColumn = new sap.m.Column({
-			header: new sap.m.Text({text:"Name"})
+			header: new sap.m.Text({text:"Name"}),
+			minScreenWidth: "",
+			demandPopIn: false
 		});
 		columns.push(oColumn);
 
 		oColumn = new sap.m.Column({
-			header: new sap.m.Text({text:"Team"})
+			header: new sap.m.Text({text:"Team"}),
+			minScreenWidth: "1400px",
+			demandPopIn: true
 		});
 		columns.push(oColumn);
 
 		oColumn = new sap.m.Column({
-			header: new sap.m.Text({text:"Sex"})
+			header: new sap.m.Text({text:"Sex"}),
+			minScreenWidth: "1400px",
+			demandPopIn: true
 		});
 		columns.push(oColumn);
 
 		oColumn = new sap.m.Column({
-			header: new sap.m.Text({text:"Position"})
+			header: new sap.m.Text({text:"Position"}),
+			minScreenWidth: "1400px",
+			demandPopIn: true
 		});
 		columns.push(oColumn);
 
 		oColumn = new sap.m.Column({
-			header: new sap.m.Text({text:"Assists"})
+			header: new sap.m.Text({text:"Assists"}),
+			minScreenWidth: "1000px",
+			demandPopIn: true
 		});
 		columns.push(oColumn);
 
 		oColumn = new sap.m.Column({
-			header: new sap.m.Text({text:"Goals"})
+			header: new sap.m.Text({text:"Goals"}),
+			minScreenWidth: "1000px",
+			demandPopIn: true
 		});
 		columns.push(oColumn);
 
 		oColumn = new sap.m.Column({
-			header: new sap.m.Text({text:"Touches"})
+			header: new sap.m.Text({text:"Touches"}),
+			minScreenWidth: "1000px",
+			demandPopIn: true
 		});
 		columns.push(oColumn);
 
 		oColumn = new sap.m.Column({
-			header: new sap.m.Text({text:"Drops"})
+			header: new sap.m.Text({text:"Drops"}),
+			minScreenWidth: "1000px",
+			demandPopIn: true
 		});
 		columns.push(oColumn);
 
 		oColumn = new sap.m.Column({
-			header: new sap.m.Text({text:"Throwaways"})
+			header: new sap.m.Text({text:"Throwaways"}),
+			minScreenWidth: "1000px",
+			demandPopIn: true
 		});
 		columns.push(oColumn);
 
 		oColumn = new sap.m.Column({
-			header: new sap.m.Text({text:"Blocks"})
+			header: new sap.m.Text({text:"Blocks"}),
+			minScreenWidth: "1000px",
+			demandPopIn: true
 		});
 		columns.push(oColumn);
 
 		oColumn = new sap.m.Column({
-			header: new sap.m.Text({text:"Total Score"})
+			header: new sap.m.Text({text:"Total Score"}),
+			minScreenWidth: "",
+			demandPopIn: false
 		});
 		columns.push(oColumn);
 
 		var oTable = new sap.m.Table(this.createId("table"), {
 			columns: columns,
+			fixedLayout: false,
 			mode: sap.m.ListMode.None
+		});
+
+		var oScroll = new sap.m.ScrollContainer(this.createId("scroll"), {
+			vertical: true,
+			height: "100%",
+			content: [oTable]
 		});
 
 		var oDetailPage = new sap.m.Page(this.createId("FantasyTeamsTablePage"),{
 			title: "{i18n>titleFantasyTeamsDetailView}",
-			content: [oTable],
+			content: [oScroll],
 			showFooter:false
 		});
 
@@ -147,12 +176,6 @@ sap.ui.jsview("aul_fantasy.view.FantasyTeams", {
 		oButton = new sap.m.Button(this.createId("ButtonRegister"),{
 			text: "Register",
 			press: [oController.navigateToRegister,oController]
-		});
-		oToolHeader.addContent(oButton);
-
-		oButton = new sap.m.Button(this.createId("ButtonInfo"),{
-			text: "Info",
-			press: [oController.navigateToInfo,oController]
 		});
 		oToolHeader.addContent(oButton);
 

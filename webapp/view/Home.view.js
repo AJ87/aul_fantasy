@@ -35,7 +35,7 @@ sap.ui.jsview("aul_fantasy.view.Home", {
 		});
 
 		var oText2 = new sap.m.Text({
-			text:"To register a fantasy team you will need to be a member of a franchise. Use the same email you used in the process on the Register page when you submit your fantasy team."
+			text:'We want to continue to improve the fantasy site in the future, if you have ideas please email contact@australianultimateleague.com'
 		});
 
 		var oPanel2 = new sap.m.Panel({
@@ -45,7 +45,7 @@ sap.ui.jsview("aul_fantasy.view.Home", {
 		});
 
 		var oText3 = new sap.m.Text({
-			text:"To register a team go to Register and select 6 men and 6 women from the different franchises. Then go to Your Team and click Register Team. Fill in the details and Submit. Once the league starts you will be able to see your team's stats on the Fantasy Teams page."
+			text:"If you are a Javascript developer and would like to help out with maintaining/writing new code please let us know"
 		});
 
 		var oPanel3 = new sap.m.Panel({
@@ -85,12 +85,6 @@ sap.ui.jsview("aul_fantasy.view.Home", {
 		oButton = new sap.m.Button(this.createId("ButtonRegister"),{
 			text: "Register",
 			press: [oController.navigateToRegister,oController]
-		});
-		oToolHeader.addContent(oButton);
-
-		oButton = new sap.m.Button(this.createId("ButtonInfo"),{
-			text: "Info",
-			press: [oController.navigateToInfo,oController]
 		});
 		oToolHeader.addContent(oButton);
 

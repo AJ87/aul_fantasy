@@ -68,6 +68,7 @@ sap.ui.jsview("aul_fantasy.view.TeamStats", {
 
 		var oTable = new sap.m.Table(this.createId("table"), {
 			columns: columns,
+			fixedLayout: false,
 			mode: sap.m.ListMode.None
 		});
 
@@ -132,12 +133,6 @@ sap.ui.jsview("aul_fantasy.view.TeamStats", {
 		oButton = new sap.m.Button(this.createId("ButtonRegister"),{
 			text: "Register",
 			press: [oController.navigateToRegister,oController]
-		});
-		oToolHeader.addContent(oButton);
-
-		oButton = new sap.m.Button(this.createId("ButtonInfo"),{
-			text: "Info",
-			press: [oController.navigateToInfo,oController]
 		});
 		oToolHeader.addContent(oButton);
 

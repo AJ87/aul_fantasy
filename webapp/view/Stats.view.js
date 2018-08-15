@@ -145,12 +145,6 @@ sap.ui.jsview("aul_fantasy.view.Stats", {
 		});
 		oToolHeader.addContent(oButton);
 
-		oButton = new sap.m.Button(this.createId("ButtonInfo"),{
-			text: "Info",
-			press: [oController.navigateToInfo,oController]
-		});
-		oToolHeader.addContent(oButton);
-
 		var oPage = new sap.m.Page(this.createId("StatsPage"),{
 			title: "{i18n>title}",
 			showHeader: true,
