@@ -25,6 +25,7 @@ sap.ui.define([
 
 						that.oMasterModel = {ladder: jQuery.parseJSON(this.response)};
 						that.getView().setModel(new JSONModel(that.oMasterModel),"masterModel");
+						that.getView().getModel("masterModel").setSizeLimit(140);
 						that.getTeamData(that.oMasterModel.ladder[0].teamName);
 						that._oDetailPage.setTitle(that.oMasterModel.ladder[0].teamName);
 
